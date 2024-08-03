@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.kt": "kotlin",
+        "iostream": "cpp"
+    }
+}
