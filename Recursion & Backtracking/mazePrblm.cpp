@@ -61,9 +61,7 @@ void printPaths5(int i, int j, vector<vector<bool>>& v, string s, vector<vector<
     if (i == n - 1 && j == n - 1) {
         path[i][j] = step;
         for (vector<int> x : path) {
-            for (int y : x) {
-                cout << y << ' ';
-            }
+            for (int y : x) cout << y << ' ';
             cout << endl;
         }
         cout << s << endl;
