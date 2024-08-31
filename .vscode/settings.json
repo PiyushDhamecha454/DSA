@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "*.kt": "kotlin",
-        "iostream": "cpp"
+        "COMMIT_EDITMSG": "cpp",
+        "iostream": "cpp",
+        "bitset": "cpp",
+        "ostream": "cpp"
     }
 }
