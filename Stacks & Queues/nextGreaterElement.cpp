@@ -18,6 +18,20 @@ vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
     for (int x : nums1) nums3.push_back(nextGreaterMap[x]);
     return nums3;
 }
+vector<int> nextGreaterElement2(vector<int>& nums) {
+    unordered_map<int, int> nextGreaterMap;
+    stack<int> s;
+    for (int i = nums.size() - 1; i >= 0; i--) {
+        int current = nums[i];
+        while (!s.empty() && s.top() <= current) s.pop();
+        if (s.empty()) nextGreaterMap[current] = -1;
+        else nextGreaterMap[current] = s.top();
+        s.push(current);
+    }
+    vector<int> nums3;
+    for (int x : nums) nums3.push_back(nextGreaterMap[x]);
+    return nums3;
+}
 /*
 (>__<)
     current = 2
@@ -33,7 +47,7 @@ vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
     nextGreaterMap[1] = 3
     stack = {4, 3}
     nums3 = {-1, 3, -1}
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+_____________________________________________________________________________________________________________________________________________________________
     current = 4
     nextGreaterMap[4] = -1
     stack = {4}
@@ -53,6 +67,12 @@ signed main() {
     cin.tie(NULL);
     vector<int> nums1 = {4, 1, 2}, nums2 = {1, 3, 4, 2};
     vector<int> nums3 = nextGreaterElement(nums1, nums2);
+    for (int x : nums3) cout << x << ' ';
+    cout << endl;
+    nums2.clear();
+    nums3.clear();
+    nums2 = {1, 2, 3, 4, 3};
+    nums3 = nextGreaterElement2(nums2);
     for (int x : nums3) cout << x << ' ';
     cout << endl;
 }
