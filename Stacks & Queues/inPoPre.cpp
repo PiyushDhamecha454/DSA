@@ -59,8 +59,31 @@ string inPre (string infix) {
         if (infix[i] == '(') infix[i] = ')';
         else if (infix[i] == ')') infix[i] = '(';
     }
-    string prefix = inPost(infix);
-    reverse(prefix.begin(), prefix.end());
+    stack<char> st;
+    string prefix;
+    for (int i = 0; i < l; i++) {
+        if (isalnum(infix[i])) prefix += infix[i];
+        else if (infix[i] == ')') st.push(infix[i]);
+        else if (infix[i] == '(') {
+            while (!st.empty() && st.top() != ')') {
+                prefix += st.top();
+                st.pop();
+            }
+            st.pop();
+        }
+        else if (isOperator(infix[i])) {
+            while (!st.empty() && getPriority(st.top()) >= getPriority(infix[i])) {
+                prefix += st.top();
+                st.pop();
+            }
+            st.push(infix[i]);
+        }
+    }
+    while (!st.empty()) {
+        prefix += st.top();
+        st.pop();
+    }
+    reverse (prefix.begin(), prefix.end());
     return prefix;
 }
 string prePost(string prefix) {
@@ -131,8 +154,6 @@ string postPre(string postfix) {
 signed main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-    string s = "x + y * z / w + u";
-    cout << inPre(s) << endl << inPost(s) << endl;
-    s = "*+ab-cd";
-    cout << prePost(s) << endl;
+    string s = "x+y*z/w+u";
+    cout << inPre(s) << endl;
 }
