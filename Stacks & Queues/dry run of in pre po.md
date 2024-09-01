@@ -99,3 +99,39 @@ function infixToPostfix(infix):
     
     return result
 ```
+
+# 3. Postfix to Prefix Conversion
+### Algorithm
+
+* Initialize an empty stack.
+* Read the postfix expression from left to right.
+* For each character in the expression:
+    * If it is an operand, push it to the stack.
+    * If it is an operator, pop two operands from the stack, create a string by concatenating the operator followed by the two operands, and push the resulting string back to the stack.
+* The result is the value at the top of the stack after the entire expression is processed.
+
+### Dry Run Example
+
+**Postfix Expression** : `AB+C*DE/-`
+1. Stack after processing A, B, +: (+AB
+1. Stack after processing C, *: (*+ABC
+1. Stack after processing D, E, /: (/DE
+1. Stack after processing -: (-*+ABC/DE
+
+### Pseudocode
+```cpp
+function postfixToPrefix(postfix):
+    stack = empty stack
+    
+    for each character ch in postfix:
+        if ch is an operand:
+            push ch to stack
+        else if ch is an operator:
+            operand1 = pop from stack
+            operand2 = pop from stack
+            expression = ch + operand2 + operand1
+            push expression to stack
+    
+    return top of stack
+
+```
